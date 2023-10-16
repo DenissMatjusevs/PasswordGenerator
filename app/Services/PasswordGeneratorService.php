@@ -185,13 +185,11 @@ class PasswordGeneratorService implements PasswordGeneratorContract
                 $result['isError'] = true;
             }
 
-            $sets3 = $this->numbersCount > 0 & $this->bigLettersCount > 0 & $this->smallLettersCount > 0;
-            $sets2 = $this->bigLettersCount > 0 & $this->smallLettersCount > 0;
+            $sets3 = $this->numbers & $this->bigLetters & $this->smallLetters;
+            $sets2 = $this->bigLetters & $this->smallLetters & !$this->numbers;
 
             if ($result['isError'] & $sets3) {
-                $max = $this->numbersCount + $this->bigLettersCount + $this->smallLettersCount - 1;
                 $result['errorMessage'] = "Length of password is too long to create a password with unique symbols.";
-                $result['errorMessage'] .= " Max length of password is: $max";
             } elseif ($result['isError'] & $sets2) {
                 $max = strlen($this->upperCase) + strlen($this->lowerCase);
                 $result['errorMessage'] = "Max length of password is: $max";

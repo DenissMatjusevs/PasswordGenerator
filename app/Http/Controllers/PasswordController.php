@@ -24,11 +24,11 @@ class PasswordController extends Controller
 
     public function generatePassword(Request $request, PasswordGeneratorService $generator):view {
         $validation_rules = ['password_length' => 'required|numeric|gt:0'];
-        $validated = $request->validate($validation_rules);
+        $request->validate($validation_rules);
 
-        $numbers = $request->get('numbers', true);
-        $bigLetters = $request->get('big_letters', true);
-        $smallLetters = $request->get('small_letters', true);
+        $numbers = $request->get('numbers', 0);
+        $bigLetters = $request->get('big_letters', 0);
+        $smallLetters = $request->get('small_letters', 0);
         $passwordLength = $request->get('password_length', 5);
 
         $result = $generator->generatePassword($numbers, $bigLetters, $smallLetters, $passwordLength);
