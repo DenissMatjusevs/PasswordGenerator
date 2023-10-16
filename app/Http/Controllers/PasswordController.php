@@ -8,7 +8,8 @@ use Illuminate\View\View;
 
 class PasswordController extends Controller
 {
-    public function index(): View {
+    public function index(): View
+    {
         $context = [
             'numbers' => true,
             'password' => null,
@@ -22,7 +23,8 @@ class PasswordController extends Controller
         return view('password', $context);
     }
 
-    public function generatePassword(Request $request, PasswordGeneratorService $generator):View {
+    public function generatePassword(Request $request, PasswordGeneratorService $generator): View
+    {
         $validation_rules = ['password_length' => 'required|numeric|gt:0'];
         $request->validate($validation_rules);
 

@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Services\Contracts\PasswordGeneratorContract;
 
-
 class PasswordGeneratorService implements PasswordGeneratorContract
 {
     private string $number;
@@ -19,7 +18,8 @@ class PasswordGeneratorService implements PasswordGeneratorContract
     private bool $bigLetters;
     private bool $smallLetters;
 
-    public function __construct () {
+    public function __construct()
+    {
         $this->number = '23456789';
         $this->upperCase = 'ABCDEFGHIJKLMNPQRSTUVWXYZ';
         $this->lowerCase = 'abcdefghijkmnopqrstuvwxyz';
@@ -43,7 +43,9 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         self::getCounts($parts, $passwordLength);
 
         $result = self::validate($parts, $passwordLength);
-        if ($result['isError']) return $result;
+        if ($result['isError']) {
+            return $result;
+        }
 
         $password = self::getPassword();
 
@@ -54,7 +56,8 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         ];
     }
 
-    private function getPassword(): string {
+    private function getPassword(): string
+    {
         $password = '';
         $numberSymbols = '';
         if ($this->numbers) {
@@ -84,7 +87,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         return $password;
     }
 
-    private function getCounts(int $parts, int $passwordLength):void
+    private function getCounts(int $parts, int $passwordLength): void
     {
         $numbersCount = 0;
         $bigLettersCount = 0;
@@ -93,7 +96,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         if ($parts === 3) {
             $numbersCount = floor($passwordLength / $parts);
             $bigLettersCount = floor($passwordLength / $parts);
-            $smallLettersCount = $passwordLength - $numbersCount -$bigLettersCount;
+            $smallLettersCount = $passwordLength - $numbersCount - $bigLettersCount;
         } elseif ($parts === 2) {
             if ($this->numbers) {
                 $numbersCount = floor($passwordLength / $parts);
@@ -122,11 +125,9 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         } else {
             if ($this->numbers) {
                 $numbersCount = $passwordLength;
-            }
-            elseif ($this->bigLetters) {
+            } elseif ($this->bigLetters) {
                 $bigLettersCount = $passwordLength;
-            }
-            else {
+            } else {
                 $smallLettersCount = $passwordLength;
             }
         }
@@ -141,8 +142,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         $rand = '';
         $setLength = strlen($set);
 
-        for ($i = 0; $i < $length; $i++)
-        {
+        for ($i = 0; $i < $length; $i++) {
             $rand .= $set[random_int(0, $setLength - 1)];
         }
 
