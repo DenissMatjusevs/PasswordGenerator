@@ -4,5 +4,5 @@ namespace App\Services\Contracts;
 
 interface PasswordGeneratorContract
 {
-    public function generatePassword($numbers, $bigLetters, $smallLetters, $passwordLength);
+    public function generatePassword(bool $numbers, bool $bigLetters, bool $smallLetters, int $passwordLength);
 }

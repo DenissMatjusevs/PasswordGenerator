@@ -33,7 +33,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         $this->smallLetters = false;
     }
 
-    public function generatePassword($numbers, $bigLetters, $smallLetters, $passwordLength): array
+    public function generatePassword(bool $numbers, bool $bigLetters, bool $smallLetters, int $passwordLength): array
     {
         $parts = intval($numbers) + intval($bigLetters) + intval($smallLetters);
         $this->numbers = (bool)$numbers;
@@ -84,7 +84,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         return $password;
     }
 
-    private function getCounts($parts, $passwordLength):void
+    private function getCounts(int $parts, int $passwordLength):void
     {
         $numbersCount = 0;
         $bigLettersCount = 0;
@@ -136,7 +136,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         $this->smallLettersCount = $smallLettersCount;
     }
 
-    private function getRandom($set, $length): string
+    private function getRandom(string $set, int $length): string
     {
         $rand = '';
         $setLength = strlen($set);
@@ -149,7 +149,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         return $rand;
     }
 
-    private function getUnique($string): string
+    private function getUnique(string $string): string
     {
         $array = str_split($string);
         $collection = collect($array);
@@ -157,7 +157,7 @@ class PasswordGeneratorService implements PasswordGeneratorContract
         return implode('', $unique);
     }
 
-    private function validate($parts, $passwordLength): array
+    private function validate(int $parts, int $passwordLength): array
     {
         $result = [
             'password' => '',

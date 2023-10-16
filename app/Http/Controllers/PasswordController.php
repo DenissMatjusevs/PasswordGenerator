@@ -22,7 +22,7 @@ class PasswordController extends Controller
         return view('password', $context);
     }
 
-    public function generatePassword(Request $request, PasswordGeneratorService $generator):view {
+    public function generatePassword(Request $request, PasswordGeneratorService $generator):View {
         $validation_rules = ['password_length' => 'required|numeric|gt:0'];
         $request->validate($validation_rules);
 
